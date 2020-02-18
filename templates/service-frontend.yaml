@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "wildwest-shooter.fullname" . }}-{{ .Values.name.frontend }}
+  labels:
+    {{- include "wildwest-shooter.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.backend.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "wildwest-shooter.selectorLabels" . | nindent 4 }}
+    role: {{ .Values.name.frontend }}
