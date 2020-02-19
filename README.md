@@ -13,7 +13,7 @@ helm install --debug --generate-name ./wildwest-shooter/
 
 oc policy add-role-to-user edit -z $(oc get sa --no-headers=true | grep wildwest-shooter | tail -1 | awk '{print $1}')
 
---- Create in the project additional pods which will be deleted by players ---
+--- Create additional pods in the project which will be deleted by players during the game ---
 
 For example quarkus hello-world:
 
