@@ -5,6 +5,9 @@ oc new-project wildwest-shooter-helm
 
 git clone https://github.com/jstakun/wildwest-shooter-helm3-chart.git ./wildwest-shooter
 
+--- Modify ingress host to match your ingress routing configuration in ./wildwest-shooter/values.yaml ---
+sed -i "s/wildwest-shooter.apps-crc.testing/wildwest-shooter.APPS.YOURDOMAIN.COM/g" ./wildwest-shooter/values.yaml
+
 helm install --debug --generate-name ./wildwest-shooter/
 
 oc policy add-role-to-user edit -z $(oc get sa --no-headers=true | grep wildwest-shooter | tail -1 | awk '{print $1}')
