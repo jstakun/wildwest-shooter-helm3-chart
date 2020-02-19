@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "wildwest-shooter.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.replicaCountFrontend }}
   selector:
     matchLabels:
       {{- include "wildwest-shooter.selectorLabels" . | nindent 6 }}
