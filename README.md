@@ -9,6 +9,8 @@ git clone https://github.com/jstakun/wildwest-shooter-helm3-chart.git ./wildwest
 
 sed -i "s/wildwest-shooter.apps-crc.testing/wildwest-shooter.APPS.YOURDOMAIN.COM/g" ./wildwest-shooter/values.yaml
 
+oc delete sa --selector='app.kubernetes.io/name=wildwest-shooter'
+
 helm install --debug --generate-name ./wildwest-shooter/
 
 oc policy add-role-to-user edit -z $(oc get sa --no-headers=true | grep wildwest-shooter | tail -1 | awk '{print $1}')
