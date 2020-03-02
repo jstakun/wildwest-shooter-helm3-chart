@@ -9,7 +9,7 @@ Wildwest Shooter game Helm3 chart
 
 	sed -i "s/wildwest-shooter.apps-crc.testing/wildwest-shooter.APPS.YOURDOMAIN.COM/g" ./wildwest-shooter/values.yaml
 
-4. --- You can omit this step if you deployed helm chart for the first time to new project  ---
+4. --- You can omit this step if you'll deploy helm chart for the first time  ---
 
 	oc delete sa --selector='app.kubernetes.io/name=wildwest-shooter'
 
