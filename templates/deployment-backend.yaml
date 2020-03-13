@@ -4,6 +4,7 @@ metadata:
   name: {{ include "wildwest-shooter.fullname" . }}-{{ .Values.name.backend }}
   labels:
     {{- include "wildwest-shooter.labels" . | nindent 4 }}
+    app.kubernetes.io/part-of: {{ .Chart.Name  }}
 spec:
   replicas: {{ .Values.replicaCountBackend }}
   selector:
