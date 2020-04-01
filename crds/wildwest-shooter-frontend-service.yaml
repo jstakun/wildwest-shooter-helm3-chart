@@ -1,0 +1,23 @@
+apiVersion: serving.knative.dev/v1alpha1 
+kind: Service
+metadata:
+  name: frontend
+spec:
+  template:
+    metadata:
+      annotations:
+        # Disable scale to zero with a minScale of 1.
+        autoscaling.knative.dev/minScale: "2"
+        autoscaling.knative.dev/maxScale: "20"      
+    spec:
+      containerConcurrency: 10
+      containers:
+      - env:
+        - name: BACKEND_SERVICE
+          value: wildwest-shooter-backend:8080
+        image: quay.io/jstakun/wildwest-shooter-frontend:0.2
+        name: wildwest-shooter-frontend
+        
+ 
+        
+ 
