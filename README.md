@@ -40,8 +40,10 @@ oc scale --replicas=10 dc hello-native-quarkus
 ```
 
 7. In addition this chart will also install Serverless frontend service CRD. If you want to use it first you'll need to install [OpenShift Serverless 
-       operator](https://docs.openshift.com/container-platform/4.3/serverless/installing_serverless/installing-openshift-serverless.html) and configure [Knative Serving](https://docs.openshift.com/container-platform/4.3/serverless/installing_serverless/installing-knative-serving.html). Finally you'll need to edit BACKEND_SERVICE env variable in Serverless service definition:
+       operator](https://docs.openshift.com/container-platform/4.3/serverless/installing_serverless/installing-openshift-serverless.html) and configure [Knative Serving](https://docs.openshift.com/container-platform/4.3/serverless/installing_serverless/installing-knative-serving.html). Finally you'll need to edit BACKEND_SERVICE env variable in Serverless service definition to point you backend service endpoint:
 ```     
+oc get svc | grep backend | awk '{print $1}'
+
 oc edit Service.serving.knative.dev frontend
 ```
 
