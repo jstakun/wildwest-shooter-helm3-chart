@@ -34,16 +34,16 @@ helm install --debug --generate-name ./wildwest-shooter/
 6. Create additional pods in the project which will be deleted by players during the game. For example quarkus hello-world:
 
 ```
-oc new-app quay.io/jstakun/hello-quarkus:0.1 --name=hello-native-quarkus
+oc new-app quay.io/jstakun/hello-quarkus:0.3 --name=hello-native-quarkus
 
-oc scale --replicas=10 dc hello-native-quarkus
+oc scale --replicas=10 deployment hello-native-quarkus
 ```
 
 7. In addition this chart will also install Serverless frontend service CRD. If you want to use it first you'll need to install [OpenShift Serverless 
-       operator](https://docs.openshift.com/container-platform/4.3/serverless/installing_serverless/installing-openshift-serverless.html) and configure [Knative Serving](https://docs.openshift.com/container-platform/4.3/serverless/installing_serverless/installing-knative-serving.html). Finally you'll need to edit BACKEND_SERVICE env variable in Serverless service definition to point you backend service endpoint:
+       operator](https://docs.openshift.com/container-platform/latest/serverless/installing_serverless/installing-openshift-serverless.html) and configure [Knative Serving](https://docs.openshift.com/container-platform/latest/serverless/installing_serverless/installing-knative-serving.html). Finally you'll need to edit BACKEND_SERVICE env variable in Serverless service definition to point you backend service endpoint. For example you can use following commands:
 ```     
 oc get svc | grep backend | awk '{print $1}'
 
-oc edit Service.serving.knative.dev frontend
+oc patch Service.serving.knative.dev frontend --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/env/0/value", "value":"wildwest-shooter:8080"}]'
 ```
 

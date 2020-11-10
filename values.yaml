@@ -59,7 +59,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: wildwest-shooter.apps.cluster-cee-3fb4.cee-3fb4.example.opentlc.com
+    - host: wildwest-shooter.apps-crc.testing
       paths:
       - / 
   tls: []
